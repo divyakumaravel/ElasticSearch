@@ -39,7 +39,7 @@ public class EmployeeController {
                                           @RequestParam(defaultValue = "TIMESTAMP") SortField sortField,
                                           @RequestParam(defaultValue = "ASC") Sort.Direction sortDirection) {
         log.info("Fetching compensation data sorted by timestamp");
-        Pageable pageable = PageRequest.of(page, sizePerPage, Sort.by(sortDirection, sortField.getDatabaseFieldName()));
-        return employeeService.findAllByPage(pageable);
+        Pageable pageable = PageRequest.of(page, sizePerPage);
+        return employeeService.findAllByPage(pageable, sortDirection);
     }
 }

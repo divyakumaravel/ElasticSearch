@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -51,7 +52,7 @@ class EmployeeControllerTest {
                 EmployeeResponse.builder().id("1").build(),
                 EmployeeResponse.builder().id("2").build());
 
-        when(employeeService.findAllByPage(any(Pageable.class))).thenReturn(employeeResponses);
+        when(employeeService.findAllByPage(any(Pageable.class), eq(Sort.Direction.ASC))).thenReturn(employeeResponses);
 
         mockMvc.perform(get("/sortedCompensations")
                         .contentType(MediaType.APPLICATION_JSON))
